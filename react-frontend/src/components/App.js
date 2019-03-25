@@ -20,22 +20,22 @@ class App extends Component {
 		this.state = {
 			formData: [],
 			model: null,
-      		};
+      	};
   	}
   
 	async componentDidMount() {
      	this.setState({ model: await tf.loadLayersModel(modelURL),
-                   	loading: true});
+                   		loading: true});
   	}
 
 	classify = (preprcData) => {
-     			const inputDim = [1, 150]
+     	const inputDim = [1, 150]
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
 		// prediction using model :: output as a softmax result that represent's probability of each 20 elements.
 
      	const prediction = tf.tidy(() => { 
         	let paddedSeq = tf.tensor1d(preprcData).pad( [[ inputDim[1]-preprcData.length, 0 ]] );
-		return (this.state.model).predictOnBatch(tf.reshape(paddedSeq, inputDim));
+			return (this.state.model).predictOnBatch(tf.reshape(paddedSeq, inputDim));
 		 });
 		 
      	return prediction.dataSync();  
@@ -43,57 +43,46 @@ class App extends Component {
 
   	// callback function InputForm component : get input value and post server 
   	handleCreate = async (data) => {
-     		// Text Data -> server (POST : txt) -> text2Seq 
-     		var processedText = await fetch("/getData", { method: 'POST',
-            						      body: [data.country]
-							    }).then(response => {
-           		return response.json();
-        	}).then(result => {
-           		return result;
-     		});
+     	// Text Data -> server (POST : txt) -> text2Seq 
+     	var processedText = await fetch("/getData", {	method: 'POST',
+            						      				body: [data.country]
+							    					}).then(response => {
+           												return response.json();
+        											}).then(result => {
+           												return result;
+     												});
 
-     		data.value  = this.classify(processedText[0]);
-     		data.country = "China";
+     	data.value  = this.classify(processedText[0]);
+     	data.country = "China";
 			 
-			//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
-			const { adder } = this.props;
-			adder([data.value]);
-			console.log(this.props.value);
-			//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
+		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
+		const { adder } = this.props;
+		adder([data.value]);
+		console.log(this.props.value);
+		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-     		var singleObj = [data.country, Number(data.value)* 100];
-     		this.setState({ formData: update( this.state.formData,
-           					{
-              						$push: [singleObj]
-           					})
-     		     })
+     	var singleObj = [data.country, Number(data.value)* 100];
+     	this.setState({ formData: update( this.state.formData, { $push: [singleObj] }) })
   	}
  
   	render() {
   		let pageData;
     		if( this.state.model === null ) {
-
 				pageData = <container class="centered">
-                  			<Spinner size={120} 
-                           	 	 	 spinnerColor={"blue"} 
-                           	 		 spinnerWidth={2} />
-                  			<p>LOADING MODEL</p>
+								<Spinner size={120} 
+                           	 	 	 	 spinnerColor={"blue"} 
+                           	 		 	 spinnerWidth={2} />
+                  				<p>LOADING MODEL</p>
                   		   </container>
-
-
 			} else {
-
        			pageData = <div>
-                  			<World appData={this.state.formData} />
-                  			<Form1 onCreate={this.handleCreate} />
-						  </div>
-							 
-							 
+                  		   		<World appData={this.state.formData} />
+                  				<Form1 onCreate={this.handleCreate} />
+						   </div>
     		}
     		return ( <div>{pageData}</div> );
   	}
 }
-
 
 let mapStateToProps = (state) => {
 	return {
@@ -101,11 +90,9 @@ let mapStateToProps = (state) => {
 	};
 }
 
-
 const mapDispatchToProps = dispatch => ({
 	adder: predRes => dispatch( adder(predRes) ),
 });
-
 
 export default connect(
 	mapStateToProps,

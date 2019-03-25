@@ -3,39 +3,32 @@ import Chart from "react-google-charts";
 
 let geo_Header = [["Country", "Popularity"]];
 
-const options = {
- colorAxis: {colors: ['black']},
- legend: "none"
-};
+const options = { colorAxis: {colors: ['black']},
+                  legend: "none" };
 
 
 class World extends React.Component {
   constructor(props){
-     super(props);
-     this.state = {
-       data : geo_Header.concat(this.props.appData) 
-     };
+    super(props);
+    this.state = {
+      data : geo_Header.concat(this.props.appData) 
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-     
+  componentWillReceiveProps(nextProps) {    
      if(nextProps.appData !== this.props.appData) {
         this.setState({data : this.state.data.concat(nextProps.appData)});
      }
   }
 
-
   render() {
-
      return (
       <div> 
-        <Chart 
-	chartType="GeoChart" 
-	width="100%" 
-	height="300px"
-	data={this.state.data} 
-	options={options} 
-	/>
+        <Chart  chartType="GeoChart" 
+                width="100%" 
+	              height="300px"
+	              data={this.state.data} 
+	              options={options} />
       </div>
     );
   }
