@@ -1,19 +1,12 @@
 import React from 'react';
 import {
   Form,
-  FormGroup,
-  FormLabel,
-  FormControl,
   Button,
   Col,
-  Container
 } from 'react-bootstrap';
 
 class InputForm1 extends React.Component {
-   state = {
-      country: '',
-      value: ''
-   }
+   state = { country: '' }
 
    handleChange = (e) => {
       this.setState({
@@ -25,8 +18,7 @@ class InputForm1 extends React.Component {
 	   e.preventDefault();
 	   this.props.onCreate(this.state); // 상태 값을 부모에게 전달???
 	   this.setState({
-	      country: '',
-         value: ''
+	      country: ''
       });
    }
 
@@ -36,29 +28,19 @@ class InputForm1 extends React.Component {
 
    render() {
       return (
-         <Container>
 	         <Form onSubmit={this.handleSubmit}>
                <Form.Row>
-                  <Form.Label>state.country</Form.Label>
+                  <Form.Label>Input ingredient list</Form.Label>
                   <Form.Control  as="textarea"
                                  required
                                  variant="dark"
-                                 placeholder="Country"
+                                 placeholder="Tomato, Green Tea, olive oil"
                                  value={this.state.country}
                                  onChange={this.handleChange}
                                  name="country"/>
                   <Form.Control.Feedback type="invalid">
                      Please provide a valid input.
                   </Form.Control.Feedback>
-               </Form.Row>
-               <Form.Row>
-               <Form.Label>state.popularity</Form.Label>
-	            <Form.Control  as="textarea" 
-                              variant="dark"
-	                           placeholder="Popularity"
-                              value={this.state.value}
-                              onChange={this.handleChange}
-                              name="value"/>
                </Form.Row>
                <br></br>
                <Form.Row>
@@ -70,7 +52,6 @@ class InputForm1 extends React.Component {
                   </Form.Group>
                </Form.Row>
             </Form>
-         </Container>
      );
    }
 }

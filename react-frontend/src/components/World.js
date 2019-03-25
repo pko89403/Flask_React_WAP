@@ -23,13 +23,11 @@ class World extends React.Component {
 
   render() {
      return (
-      <div> 
         <Chart  chartType="GeoChart" 
                 width="100%" 
 	              height="300px"
 	              data={this.state.data} 
 	              options={options} />
-      </div>
     );
   }
 }

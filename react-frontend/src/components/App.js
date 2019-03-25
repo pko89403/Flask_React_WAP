@@ -8,6 +8,9 @@ import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
 import { adder } from '../store/modules/addResult';
 import './App.css'
+import { Jumbotron, Container } from 'react-bootstrap';
+
+
 
 const MODEL_URL = 'http://127.0.0.1/model';
 
@@ -74,9 +77,14 @@ class App extends Component {
                   		   </container>
 			} else {
        			pageData = <div>
-                  		   		<World appData={this.state.formData} />
-								<PredictResult/>
-                  				<Form1 onCreate={this.handleCreate} />
+					   			<Container>
+									<Jumbotron >
+										<h1>Prediction Model by Learning Ingredient-Cuisine</h1>
+									</Jumbotron>
+									<World appData={this.state.formData} />
+									<PredictResult/>
+									<Form1 onCreate={this.handleCreate} />
+								</Container>  
 						   </div>
     		}
     		return ( <div>{pageData}</div> );
