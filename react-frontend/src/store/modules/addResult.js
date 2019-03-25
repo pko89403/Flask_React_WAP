@@ -1,6 +1,6 @@
 const ADDER = 'addReducer/ADDER';
 
-export const adder = elem => ({ type: ADDER, elem });
+export const adder = list => ({ type: ADDER, list });
 
 const intialState = {
 	list: [['AAAAAA']]
@@ -8,10 +8,11 @@ const intialState = {
 
 export default function addReducer(state = intialState, action)
 {
+	console.log("addReducer do action");
 	switch(action.type) {
 		case ADDER:
 			return {
-				list: action.elem
+				list: action.list
 			};
 		default:
 			return state;

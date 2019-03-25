@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import World from './World';
 import Form1 from './InputForm';
 import * as tf from '@tensorflow/tfjs';
-import './App.css'
 import update from 'react-addons-update';
 import Spinner from 'react-spinner-material';
 
 import { connect } from 'react-redux';
 import { adder } from '../store/modules/addResult';
 
+import './App.css'
+import PredictResult from './PredictResult';
+
 const modelURL = 'http://127.0.0.1/model';
 
 //////////////////////////////////////////////
 class App extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			formData: [],
 			model: null,
@@ -29,19 +31,19 @@ class App extends Component {
 	classify = (preprcData) => {
      			const inputDim = [1, 150]
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
-	// prediction using model :: output as a softmax result that represent's probability of each 20 elements.
+		// prediction using model :: output as a softmax result that represent's probability of each 20 elements.
 
      	const prediction = tf.tidy(() => { 
         	let paddedSeq = tf.tensor1d(preprcData).pad( [[ inputDim[1]-preprcData.length, 0 ]] );
 		return (this.state.model).predictOnBatch(tf.reshape(paddedSeq, inputDim));
 		 });
 		 
-     	return prediction.argMax(1).dataSync();  
+     	return prediction.dataSync();  
   	}
 
   	// callback function InputForm component : get input value and post server 
   	handleCreate = async (data) => {
-     	// Text Data -> server (POST : txt) -> text2Seq 
+     		// Text Data -> server (POST : txt) -> text2Seq 
      		var processedText = await fetch("/getData", { method: 'POST',
             						      body: [data.country]
 							    }).then(response => {
@@ -52,14 +54,15 @@ class App extends Component {
 
      		data.value  = this.classify(processedText[0]);
      		data.country = "China";
-     	
-		////
-		adder([data.value]);
-		////
+			 
+			//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
+			const { adder } = this.props;
+			adder([data.value]);
+			console.log(this.props.value);
+			//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-     	var singleObj = [data.country, Number(data.value)* 100];
-		console.log(data.country);
-     	this.setState({ formData: update( this.state.formData,
+     		var singleObj = [data.country, Number(data.value)* 100];
+     		this.setState({ formData: update( this.state.formData,
            					{
               						$push: [singleObj]
            					})
@@ -69,32 +72,39 @@ class App extends Component {
   	render() {
   		let pageData;
     		if( this.state.model === null ) {
-       			pageData = <container class="centered">
+
+				pageData = <container class="centered">
                   			<Spinner size={120} 
                            	 	 	 spinnerColor={"blue"} 
                            	 		 spinnerWidth={2} />
                   			<p>LOADING MODEL</p>
                   		   </container>
-    		} else {
+
+
+			} else {
+
        			pageData = <div>
                   			<World appData={this.state.formData} />
                   			<Form1 onCreate={this.handleCreate} />
-                  		   </div>   
+						  </div>
+							 
+							 
     		}
     		return ( <div>{pageData}</div> );
   	}
 }
 
 
-const mapStateToProps = state => ({
-	list: state.addReducer.list,
-});
+let mapStateToProps = (state) => {
+	return {
+		value : state.addReducer.list
+	};
+}
+
 
 const mapDispatchToProps = dispatch => ({
-	adder: list => dispatch( adder(list) ),
+	adder: predRes => dispatch( adder(predRes) ),
 });
-
-
 
 
 export default connect(
