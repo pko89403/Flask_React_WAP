@@ -9,7 +9,7 @@ import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
 import { adder } from '../store/modules/addResult';
 
-const modelURL = 'http://54.180.91.80/model';
+const modelURL = 'http://127.0.0.1/model';
 
 //////////////////////////////////////////////
 class App extends Component {
