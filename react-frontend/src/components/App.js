@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import World from './World';
 import Form1 from './InputForm';
+import PredictResult from './PredictResult';
 import * as tf from '@tensorflow/tfjs';
 import update from 'react-addons-update';
 import Spinner from 'react-spinner-material';
-
 import { connect } from 'react-redux';
 import { adder } from '../store/modules/addResult';
-
 import './App.css'
-import PredictResult from './PredictResult';
 
-const modelURL = 'http://127.0.0.1/model';
+const MODEL_URL = 'http://127.0.0.1/model';
 
 //////////////////////////////////////////////
 class App extends Component {
@@ -24,7 +22,7 @@ class App extends Component {
   	}
   
 	async componentDidMount() {
-     	this.setState({ model: await tf.loadLayersModel(modelURL),
+     	this.setState({ model: await tf.loadLayersModel(MODEL_URL),
                    		loading: true});
   	}
 
@@ -77,6 +75,7 @@ class App extends Component {
 			} else {
        			pageData = <div>
                   		   		<World appData={this.state.formData} />
+								<PredictResult/>
                   				<Form1 onCreate={this.handleCreate} />
 						   </div>
     		}

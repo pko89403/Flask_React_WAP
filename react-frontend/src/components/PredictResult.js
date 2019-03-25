@@ -1,18 +1,40 @@
-import React from "react";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class PredictResult extends React.Component {
-  constructor(props){
-     super(props);
-     this.state = {
-       data : this.props.predictList 
-     };
+class PredictResult extends Component {
+  constructor(props)
+  {
+    super(props);
+    this.state =  {
+      data :  this.props.value
+    };
   }
 
+  componentWillReceiveProps(nextProps) {    
+    if(nextProps.value !== this.state.value) {
+       this.setState({data : nextProps.value});
+    }
+  }
+
+  
+
   render() {
+    
+    console.log(this.state.data);
+
     return (
-      this.props.data
+      <div>
+        <p>{this.state.data}</p>
+      </div>
     );
   }
 }
 
-export default PredictResult;
+
+let mapStateToProps = (state) => {
+	return {
+		value : state.addReducer.list
+	};
+}
+
+export default connect( mapStateToProps )( PredictResult );
