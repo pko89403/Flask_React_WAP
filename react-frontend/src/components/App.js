@@ -34,7 +34,8 @@ class App extends Component {
      	const prediction = tf.tidy(() => { 
         	let paddedSeq = tf.tensor1d(preprcData).pad( [[ inputDim[1]-preprcData.length, 0 ]] );
 		return (this.state.model).predictOnBatch(tf.reshape(paddedSeq, inputDim));
-     	});
+		 });
+		 
      	return prediction.argMax(1).dataSync();  
   	}
 
@@ -57,7 +58,7 @@ class App extends Component {
 		////
 
      	var singleObj = [data.country, Number(data.value)* 100];
-	
+		console.log(data.country);
      	this.setState({ formData: update( this.state.formData,
            					{
               						$push: [singleObj]
