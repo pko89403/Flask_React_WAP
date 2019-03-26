@@ -58,8 +58,7 @@ class App extends Component {
 			 
 		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
 		const { adder } = this.props;
-		adder([data.value]);
-		console.log(this.props.value);
+		adder(data.value);
 		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
      	var singleObj = [data.country, Number(data.value)* 100];

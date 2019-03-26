@@ -25,7 +25,7 @@ class World extends React.Component {
      return (
         <Chart  chartType="GeoChart" 
                 width="100%" 
-	              height="300px"
+	              height="5%"
 	              data={this.state.data} 
 	              options={options} />
     );
