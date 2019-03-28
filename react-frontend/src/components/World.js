@@ -8,10 +8,10 @@ const REFERENCE = [ 'brazilian', 'british', 'cajun_creole', 'chinese', 'filipino
                     'jamaican', 'japanese', 'korean', 'mexican', 'moroccan', 
                     'russian', 'southern_us', 'spanish', 'thai', 'vietnamese']
 */
-const TABLE = [ 'Brazil', 'United Kingdom of Great Britain and Northern Ireland', 'United States of America', 'China', 'Philippines', 
+const TABLE = [ 'Brazil', 'England', 'United States', 'China', 'Philippines', 
                 'France', 'Greece',  'India', 'Ireland',  'Italy',  
-                'Jamaica', 'Japan', 'Korea (Republic of)', 'Mexico', 'Morocco', 
-                'Russia', 'United States of America', 'Spain', 'Thailand', 'Viet Nam']
+                'Jamaica', 'Japan', 'Korea', 'Mexico', 'Morocco', 
+                'Russia', 'United States', 'Spain', 'Thailand', 'VietNam']
 
 
 class World extends React.Component {
