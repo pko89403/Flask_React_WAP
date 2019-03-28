@@ -33,7 +33,6 @@ class World extends React.Component {
   render() {
     let arr = [["Country", "Popularity"]];
     let graphVisual = '';
-    let resList = [];
     
     if(this.state.load === true)
     {

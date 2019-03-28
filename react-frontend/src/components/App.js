@@ -78,7 +78,7 @@ class App extends Component {
        			pageData = <div>
 					   			<Container>
 									<Jumbotron >
-										<h1>Prediction Model by Learning Ingredient-Cuisine</h1>
+										<h1>Hit Country Classification System Based On Ingredient-Cuisine Dataset</h1>
 									</Jumbotron>
 									<World appData={this.state.formData} />
 									<PredictResult/>
