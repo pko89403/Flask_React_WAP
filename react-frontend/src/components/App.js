@@ -82,6 +82,7 @@ class App extends Component {
 									</Jumbotron>
 									<World appData={this.state.formData} />
 									<PredictResult/>
+									<br></br>
 									<Form1 onCreate={this.handleCreate} />
 								</Container>  
 						   </div>

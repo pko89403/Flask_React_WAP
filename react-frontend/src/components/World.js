@@ -1,35 +1,71 @@
 import React from "react";
 import Chart from "react-google-charts";
+import { connect } from 'react-redux';
 
-let geo_Header = [["Country", "Popularity"]];
-
-const options = { colorAxis: {colors: ['black']},
-                  legend: "none" };
+/*
+const REFERENCE = [ 'brazilian', 'british', 'cajun_creole', 'chinese', 'filipino', 
+                    'french', 'greek',  'indian', 'irish',  'italian',  
+                    'jamaican', 'japanese', 'korean', 'mexican', 'moroccan', 
+                    'russian', 'southern_us', 'spanish', 'thai', 'vietnamese']
+*/
+const TABLE = [ 'Brazil', 'United Kingdom of Great Britain and Northern Ireland', 'United States of America', 'China', 'Philippines', 
+                'France', 'Greece',  'India', 'Ireland',  'Italy',  
+                'Jamaica', 'Japan', 'Korea (Republic of)', 'Mexico', 'Morocco', 
+                'Russia', 'United States of America', 'Spain', 'Thailand', 'Viet Nam']
 
 
 class World extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data : geo_Header.concat(this.props.appData) 
+      data : null,
+      load : false 
     };
   }
 
   componentWillReceiveProps(nextProps) {    
-     if(nextProps.appData !== this.props.appData) {
-        this.setState({data : this.state.data.concat(nextProps.appData)});
+     if(nextProps.value !== this.state.value) {
+        this.setState({data : nextProps.value,
+                       load : true });
      }
   }
 
   render() {
-     return (
-        <Chart  chartType="GeoChart" 
-                width="100%" 
-	              height="5%"
-	              data={this.state.data} 
-	              options={options} />
+    let arr = [["Country", "Popularity"]];
+    let graphVisual = '';
+    let resList = [];
+    
+    if(this.state.load === true)
+    {
+      const { data } = this.state;
+      
+      for(var i = 0; i < data.length; i++)
+      {
+        const val = data[i] * 100;
+        const tmp = [TABLE[i], val];
+        if(val > 1){ arr.push(tmp); }
+      }
+    }
+
+    graphVisual = <Chart  chartType="GeoChart" 
+                            width="100%" 
+                            height="5%"
+                            data={arr} 
+                            options = {{  colorAxis: {colors: ['#e7711c', '#4374e0']},
+                                          legend: "none" 
+                            }}/>
+                  
+
+    return (
+        <div>{graphVisual}</div>
     );
   }
 }
 
-export default World;
+let mapStateToProps = (state) => {
+	return {
+		value : state.addReducer.list
+	};
+}
+
+export default connect( mapStateToProps )( World );

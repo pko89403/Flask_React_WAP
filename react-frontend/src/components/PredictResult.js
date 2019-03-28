@@ -4,13 +4,19 @@ import Chart from "react-google-charts";
 import './App.css'
 import { Table } from 'react-bootstrap';
 
+const TABLE = [ 'Brazil', 'United Kingdom', 'United States of America', 'China', 'Philippines', 
+                'France', 'Greece',  'India', 'Ireland',  'Italy',  
+                'Jamaica', 'Japan', 'Korea (Republic of)', 'Mexico', 'Morocco', 
+                'Russia', 'United States of America', 'Spain', 'Thailand', 'VietNam']
+
 class PredictResult extends Component {
   constructor(props)
   {
     super(props);
-    this.state =  { data : null,
-                    load : false 
-                  };
+    this.state =  { 
+      data : null,
+      load : false 
+    };
   }
 
   componentWillReceiveProps(nextProps) {    
@@ -33,16 +39,16 @@ class PredictResult extends Component {
       for(var i = 0; i < data.length; i+=1 )  
       {  
         const val = data[i] * 100;
-        const tmp = [i.toString(), val];
-        arr.push(tmp);
+        const tmp = [TABLE[i], val];
+        if(val > 1){ arr.push(tmp); }
 
         if(i % 2 === 0)
         {
           let tmpTable =  <tr>
-                            <td>{i.toString()}</td>
-                            <td>{Math.round(data[i] * 100)}</td>
-                            <td>{(i+1).toString()}</td>
-                            <td>{Math.round(data[i+1] * 100)}</td>
+                            <td>{TABLE[i]}</td>
+                            <td>{Math.round(data[i] * 100)}%</td>
+                            <td>{TABLE[i+1]}</td>
+                            <td>{Math.round(data[i+1] * 100)}%</td>
                           </tr>
           resList.push(tmpTable);
         }
@@ -52,19 +58,22 @@ class PredictResult extends Component {
       graphVisual = <div>
                       <Chart  width={'100%'}
                               height={'1%'}
-                              chartType="Bar"
+                              chartType="ColumnChart"
                               data={arr}
                               options={{
-                                title : 'Classification Result',
                                 chartArea : { width: '100%' },
+                                colors: ['00a0ff'],
                                 hAxis : {
                                   minValue: 0,
-                                  maxValue: 100,
+                                  textStyle : {
+                                    fontSize: 12
+                                  }
                                 },
                                 bar : { groupWidth : '50%'},
                                 legend : { position : 'none'},
                               }}
                       />
+                      <br></br>
                       <Table striped bordered hover size="sm">
                         <thead>
                           <tr>
