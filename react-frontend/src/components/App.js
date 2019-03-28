@@ -12,7 +12,7 @@ import { Jumbotron, Container } from 'react-bootstrap';
 
 
 
-const MODEL_URL = 'http://127.0.0.1/model';
+const MODEL_URL = 'http://54.180.91.80/model';
 
 //////////////////////////////////////////////
 class App extends Component {
@@ -30,7 +30,7 @@ class App extends Component {
   	}
 
 	classify = (preprcData) => {
-     	const inputDim = [1, 150]
+     	const inputDim = [1, 30]
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
 		// prediction using model :: output as a softmax result that represent's probability of each 20 elements.
 

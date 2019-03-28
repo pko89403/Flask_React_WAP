@@ -18,7 +18,7 @@ def input_Text_proc(text_Data):
 	global tokenizer
 	if tokenizer is None:
 		print('Tokenizer is Loaded')
-		with open('./tokenizer2.json') as f:
+		with open('./2D_YoonKim/tokenizer_maxLen30.json') as f:
 			token_json = json.load(f)
 			tokenizer = text.tokenizer_from_json( token_json )
 	
@@ -49,12 +49,12 @@ def test():
 
 @app.route("/model")
 def model():
-	json_data = json.load(open("./model_SLSTM/model.json"))
+	json_data = json.load(open('./2D_YoonKim/model/model.json'))
 	return jsonify(json_data)
 
 @app.route('/<path:path>')
 def load_shards(path):
-        return send_from_directory('./model_SLSTM', path)
+        return send_from_directory('./2D_YoonKim/model/', path)
 
 
-app.run(host="0.0.0.0", port=80, debug=True)
+app.run(host='0.0.0.0', port=80, debug=True)
