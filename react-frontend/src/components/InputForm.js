@@ -24,11 +24,14 @@ class InputForm1 extends React.Component {
 
    handleClear = (e) => {
       e.preventDefault();
+      this.setState({
+         country: ''
+      })
    }
 
    render() {
       return (
-	         <Form onSubmit={this.handleSubmit}>
+	         <Form onSubmit={this.handleSubmit} onReset={this.handleClear}>
                <Form.Row>
                   <Form.Label>Input ingredient list</Form.Label>
                   <Form.Control  as="textarea"
@@ -48,7 +51,7 @@ class InputForm1 extends React.Component {
                      <Button variant="dark"  type="submit"> 등 록 </Button>
                   </Form.Group>
                   <Form.Group as={Col}>
-                     <Button variant="danger" type="clear"> 취 소 </Button>
+                     <Button variant="danger" type="reset"> 취 소 </Button>
                   </Form.Group>
                </Form.Row>
             </Form>
