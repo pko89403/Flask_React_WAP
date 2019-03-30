@@ -77,10 +77,10 @@ class PredictResult extends Component {
                       <Table striped bordered hover size="sm">
                         <thead>
                           <tr>
-                            <th>Cuisine2</th>
-                            <th>Classifiy1</th>
-                            <th>Cuisine2</th>
-                            <th>Classify2</th>
+                            <th>Country</th>
+                            <th>Probabilty</th>
+                            <th>Country</th>
+                            <th>Probability</th>
                           </tr>
                         </thead>
                         <tbody>
