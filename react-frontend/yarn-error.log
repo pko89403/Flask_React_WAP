@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\G-ICT\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add CanvasJSReact
+  C:\Program Files\nodejs\node.exe C:\Users\G-ICT\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add Immutable
 
 PATH: 
   C:\Program Files (x86)\NAT Service;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Java\jdk1.8.0_144\bin;C:\Users\G-ICT\AppData\Local\GitHubDesktop\bin\github.exe;C:\Program Files\Git\cmd;C:\Users\G-ICT\AppData\Roaming\npm\node_modules\ant\ant\bin;C:\Users\G-ICT\AppData\Local\Android\Sdk;\tools;C:\Users\G-ICT\AppData\Local\Android\Sdk;\platform-tools;C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.0\bin;C:\graphviz-2.38\release\bin;C:\graphviz-2.38\release\bin\dot.exe;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Users\G-ICT\AppData\Local\Yarn\bin;C:\Program Files (x86)\PuTTY\;C:\Users\G-ICT\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\G-ICT\AppData\Local\Programs\Python\Python36\;C:\Users\G-ICT\AppData\Local\Microsoft\WindowsApps;C:\Users\G-ICT\AppData\Local\GitHubDesktop\bin;C:\Users\G-ICT\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;C:\Users\G-ICT\AppData\Roaming\npm;C:\Users\G-ICT\AppData\Local\Programs\Microsoft VS Code\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/CanvasJSReact: Not found
+  Error: https://registry.yarnpkg.com/Immutable: Not found
       at Request.params.callback [as _callback] (C:\Users\G-ICT\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66255:18)
       at Request.self.callback (C:\Users\G-ICT\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:129397:22)
       at Request.emit (events.js:189:13)
@@ -78,6 +78,7 @@ npm manifest:
       "react-app-polyfill": "^0.2.2",
       "react-bootstrap": "^1.0.0-beta.5",
       "react-bootstrap-form": "^0.1.4-beta6",
+      "react-chartjs-2": "^2.7.4",
       "react-dev-utils": "^8.0.0",
       "react-dom": "^16.8.4",
       "react-google-charts": "^3.0.11",
@@ -8646,6 +8647,14 @@ Lockfile:
       react-transition-group "^2.5.1"
       uncontrollable "^6.0.0"
       warning "^4.0.1"
+  
+  react-chartjs-2@^2.7.4:
+    version "2.7.4"
+    resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-2.7.4.tgz#e41ea4e81491dc78347111126a48e96ee57db1a6"
+    integrity sha512-lXTpBaDlk9rIMjRONjZd76dIUhEm3vOp2jOrJrsFG/UpFI5VqX8Xw83apVHTnUGJ968f8i/i/syLddls4NHy2g==
+    dependencies:
+      lodash "^4.17.4"
+      prop-types "^15.5.8"
   
   react-context-toolbox@^2.0.2:
     version "2.0.2"

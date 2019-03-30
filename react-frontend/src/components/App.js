@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { adder, adder2 } from '../store/modules/addResult';
 import { Jumbotron, Button, Container } from 'react-bootstrap';
 import './App.css'
+import { LIST } from 'immutable';
 
 const MODEL_URL = 'http://54.180.91.80/model';
 const MODEL_URL_AT_WINDOWS = ['http://127.0.0.1/model','http://127.0.0.1/model2'];
@@ -26,7 +27,8 @@ class App extends Component {
 			chooseModel : 0,
 			prediction : [],
 			checkbox : []
-      	};
+		};
+		console.log(props);  
   	}
   
 	async componentDidMount() {
@@ -42,13 +44,13 @@ class App extends Component {
   	}
 	
 	componentWillReceiveProps(nextProps) {
-		console.log("PROPS!!!");
-		this.setState({
-			prediction : nextProps.value1,
-			checkbox : nextProps.value2
-		});
+		console.log("APP props update")    
+		this.setState({	prediction : nextProps.value,
+						checkbox   : nextProps.value2.toJS() });
+		console.log('REDUX UPDATE - ', this.state.checkbox)
+		
 	}
-
+	
 	classify = (preprcData, model) => {
      	
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
@@ -77,13 +79,13 @@ class App extends Component {
            												return result[0];
 													 });
 													 
-		console.log(processedText);
+		//console.log(processedText);
 		// MAKE DATA SELF EMBEDDING INPUTS. /////////////////////////////////////////////////////////////////////
 
 		let paddedSeq = tf.tensor1d(processedText).pad( [[ INPUTDIM[1]-processedText.length, 0 ]] );
 		let reshapeSeq = tf.reshape(paddedSeq, INPUTDIM)
 		const classification = this.classify(reshapeSeq, this.state.models[this.state.chooseModel]);
-		console.log(classification);
+		//console.log(classification);
 
 		// MAKE DATA BAG OF 3065 WORDS /////////////////////////////////////////////////////////////////////////
 
@@ -95,7 +97,7 @@ class App extends Component {
 		let bagTensor = tf.tensor1d(bag);
 		let reshapeBag = tf.reshape(bagTensor, INPUTDIM2)
 		const classification2 = this.classify(reshapeBag, this.state.models[1]);
-		console.log(classification2);
+		//console.log(classification2);
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -106,7 +108,7 @@ class App extends Component {
   	}
  
   	render() {
-		console.log(this.state.checkbox);
+
   		let pageData;
     		if( this.state.loading === false ) {
 
@@ -119,6 +121,7 @@ class App extends Component {
 			} else {
 
 				pageData = <div>
+								<p>{this.props.value2}</p>
 					   			<Container>
 									<Jumbotron>
 										<h1>Hit Country Classification System Based On Ingredient-Cuisine Dataset</h1>

@@ -3,7 +3,7 @@ import addReducer from './addResult';
 
 
 export default combineReducers({
-	addReducer,
+	addReducer : addReducer,
 });
 
 

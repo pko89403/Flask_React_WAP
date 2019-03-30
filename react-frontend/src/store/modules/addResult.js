@@ -6,7 +6,8 @@ export const adder2 = list2 => ({ type: ADDER2, list2 });
 
 const intialState = {
 	list: [],
-	list2: []
+	list2: [false, false, false],
+	change : 0
 };
 
 export default function addReducer(state = intialState, action)
@@ -20,7 +21,8 @@ export default function addReducer(state = intialState, action)
 		case ADDER2:
 			return {
 				...state,
-				list2: action.list2				
+				list2: action.list2,
+				change : state.change + 1			
 			};
 		default:
 			return state;
