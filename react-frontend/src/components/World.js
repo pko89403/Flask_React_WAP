@@ -40,7 +40,7 @@ class World extends React.Component {
       
       for(var i = 0; i < data.length; i++)
       {
-        const val = data[i] * 100;
+        const val = Math.round(data[i] * 100);
         const tmp = [TABLE[i], val];
         if(val > 1){ arr.push(tmp); }
       }
