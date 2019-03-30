@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import World from './World';
 import Form1 from './InputForm';
 import PredictResult from './PredictResult';
+import SelectModel from './SelectModel';
 import * as tf from '@tensorflow/tfjs';
 import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
@@ -117,6 +118,8 @@ class App extends Component {
 									<Button variant="primary" size="lg" block className={this.state.inputText==="" ? 'hidden' : ' '}>{this.state.inputText}</Button>
 									<World/>
 									<PredictResult/>
+									<br></br>
+									<SelectModel/>
 									<br></br>
 									<Form1 onCreate={this.inputFormCallBack} />
 								</Container>  
