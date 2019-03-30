@@ -13,31 +13,37 @@ import { Jumbotron, Container } from 'react-bootstrap';
 
 
 const MODEL_URL = 'http://54.180.91.80/model';
-const MODEL1_URL_AT_WINDOWS = 'http://127.0.0.1/model';
-const MODEL2_URL_AT_WINDOWS = 'http://127.0.0.1/model2';
+const MODEL_URL_AT_WINDOWS = ['http://127.0.0.1/model','http://127.0.0.1/model2'];
+
 //////////////////////////////////////////////
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			formData: [],
-			model1: null,
-			model2: null,
+			models: [],
 			loading : false,
+			chooseModel : 0
       	};
   	}
   
 	async componentDidMount() {
-		 this.setState({model1: await tf.loadLayersModel(MODEL1_URL_AT_WINDOWS),
-						model2: await tf.loadLayersModel(MODEL2_URL_AT_WINDOWS),
-                   		loading: true});
+		let loaded = []
+		for(let i = 0; i < 2; i++)
+		{
+			let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
+			console.log(tmp);
+			loaded.push( tmp );
+		}
+
+		this.setState({ models: loaded,
+                		loading: true});
   	}
 
 	classify = (preprcData, model) => {
      	const inputDim = [1, 30]
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
 		// prediction using model :: output as a softmax result that represent's probability of each 20 elements.
-
+		console.log(model);
      	const prediction = tf.tidy(() => { 
         	let paddedSeq = tf.tensor1d(preprcData).pad( [[ inputDim[1]-preprcData.length, 0 ]] );
 			return (model).predictOnBatch(tf.reshape(paddedSeq, inputDim));
@@ -47,18 +53,18 @@ class App extends Component {
   	}
 
   	// callback function InputForm component : get input value and post server 
-  	handleCreate = async (data) => {
+  	inputFormCallBack = async (data) => {
      	// Text Data -> server (POST : txt) -> text2Seq 
      	var processedText = await fetch("/getData", {	method: 'POST',
             						      				body: [data.country]
 							    					}).then(response => {
            												return response.json();
         											}).then(result => {
-           												return result;
+           												return result[0];
      												});
-
-     	data.value  = this.classify(processedText[0], this.state.model1);
-			 
+		console.log(this.state.models[this.state.chooseModel]);
+     	data.value = this.classify(processedText, this.state.models[this.state.chooseModel]);
+		
 		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
 		const { adder } = this.props;
 		adder(data.value);
@@ -80,10 +86,10 @@ class App extends Component {
 									<Jumbotron >
 										<h1>Hit Country Classification System Based On Ingredient-Cuisine Dataset</h1>
 									</Jumbotron>
-									<World appData={this.state.formData} />
+									<World/>
 									<PredictResult/>
 									<br></br>
-									<Form1 onCreate={this.handleCreate} />
+									<Form1 onCreate={this.inputFormCallBack} />
 								</Container>  
 						   </div>
     		}
