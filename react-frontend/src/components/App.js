@@ -6,7 +6,7 @@ import SelectModel from './SelectModel';
 import * as tf from '@tensorflow/tfjs';
 import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
-import { adder } from '../store/modules/addResult';
+import { adder, adder2 } from '../store/modules/addResult';
 import { Jumbotron, Button, Container } from 'react-bootstrap';
 import './App.css'
 
@@ -23,7 +23,9 @@ class App extends Component {
 			models: [],
 			inputText : "",
 			loading : false,
-			chooseModel : 0
+			chooseModel : 0,
+			prediction : [],
+			checkbox : []
       	};
   	}
   
@@ -38,6 +40,14 @@ class App extends Component {
 		this.setState({ models: loaded,
                 		loading: true});
   	}
+	
+	componentWillReceiveProps(nextProps) {
+		console.log("PROPS!!!");
+		this.setState({
+			prediction : nextProps.value1,
+			checkbox : nextProps.value2
+		});
+	}
 
 	classify = (preprcData, model) => {
      	
@@ -89,9 +99,6 @@ class App extends Component {
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-		
-
 		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
 		const { adder } = this.props;
 		adder(classification);
@@ -99,6 +106,7 @@ class App extends Component {
   	}
  
   	render() {
+		console.log(this.state.checkbox);
   		let pageData;
     		if( this.state.loading === false ) {
 
@@ -131,12 +139,13 @@ class App extends Component {
 
 let mapStateToProps = (state) => {
 	return {
-		value : state.addReducer.list
+		value : state.addReducer.list,
+		value2 : state.addReducer.list2
 	};
 }
 
 const mapDispatchToProps = dispatch => ({
-	adder: predRes => dispatch( adder(predRes) ),
+	adder: predRes => dispatch( adder(predRes) )
 });
 
 export default connect(

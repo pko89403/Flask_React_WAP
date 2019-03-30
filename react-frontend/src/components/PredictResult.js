@@ -4,6 +4,8 @@ import Chart from "react-google-charts";
 import './App.css'
 import { Table } from 'react-bootstrap';
 
+
+
 const TABLE = [ 'Brazil', 'United Kingdom', 'United States of America', 'China', 'Philippines', 
                 'France', 'Greece',  'India', 'Ireland',  'Italy',  
                 'Jamaica', 'Japan', 'Korea (Republic of)', 'Mexico', 'Morocco', 
@@ -102,4 +104,4 @@ let mapStateToProps = (state) => {
 	};
 }
 
-export default connect( mapStateToProps )( PredictResult );
+export default connect( mapStateToProps )( PredictResult);
