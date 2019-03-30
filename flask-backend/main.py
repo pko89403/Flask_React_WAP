@@ -46,15 +46,30 @@ def test():
 		
 	res = input_Text_proc(data)
 	return jsonify(res)
+# Loading Tensorflow Model
+# access to "/model" connect the static files 
 
+WEIGHT_PATH = ''
 @app.route("/model")
 def model():
-	json_data = json.load(open('./2D_YoonKim/model/model.json'))
+	global WEIGHT_PATH
+	WEIGHT_PATH = './2D_YoonKim/model/'
+	json_data = json.load(open( WEIGHT_PATH + 'model.json' ))
 	return jsonify(json_data)
 
+@app.route("/model2")
+def model2():
+	global WEIGHT_PATH
+	WEIGHT_PATH = './DNN_NE/model/'
+	json_data = json.load(open( WEIGHT_PATH + 'model.json' ))
+	return jsonify(json_data)
+
+# Loading Tensorflow weights
+# access to "/<path:path>"
 @app.route('/<path:path>')
 def load_shards(path):
-        return send_from_directory('./2D_YoonKim/model/', path)
+	global WEIGHT_PATH
+	return send_from_directory(WEIGHT_PATH, path)
 
 
 app.run(host='0.0.0.0', port=80, debug=True)
