@@ -8,10 +8,10 @@ const REFERENCE = [ 'brazilian', 'british', 'cajun_creole', 'chinese', 'filipino
                     'jamaican', 'japanese', 'korean', 'mexican', 'moroccan', 
                     'russian', 'southern_us', 'spanish', 'thai', 'vietnamese']
 */
-const TABLE = [ 'Brazil', 'England', 'United States', 'China', 'Philippines', 
-                'France', 'Greece',  'India', 'Ireland',  'Italy',  
-                'Jamaica', 'Japan', 'Korea', 'Mexico', 'Morocco', 
-                'Russia', 'United States', 'Spain', 'Thailand', 'VietNam']
+const TABLE = [ "Brazil", "United Kingdom", "United States", "China", "Philippines", 
+                "France", "Greece",  "India", "Ireland",  "Italy",  
+                "Jamaica", "Japan", "South Korea", "Mexico", "Morocco", 
+                "Russia", "United States", "Spain", "Thailand", "VietNam"]
 
 
 class World extends React.Component {
@@ -50,7 +50,8 @@ class World extends React.Component {
                             width="100%" 
                             height="5%"
                             data={arr} 
-                            options = {{  colorAxis: {colors: ['#e7711c', '#4374e0']},
+                            options = {{  colorAxis: {colors: ['white', 'green']},
+                                          backgroundColor: '#00a0ff',
                                           legend: "none" 
                             }}/>
                   

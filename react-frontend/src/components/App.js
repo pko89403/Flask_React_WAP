@@ -31,7 +31,6 @@ class App extends Component {
 		for(let i = 0; i < 2; i++)
 		{
 			let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
-			console.log(tmp);
 			loaded.push( tmp );
 		}
 
@@ -43,7 +42,6 @@ class App extends Component {
      	const inputDim = [1, 30]
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
 		// prediction using model :: output as a softmax result that represent's probability of each 20 elements.
-		console.log(model);
      	const prediction = tf.tidy(() => { 
         	let paddedSeq = tf.tensor1d(preprcData).pad( [[ inputDim[1]-preprcData.length, 0 ]] );
 			return (model).predictOnBatch(tf.reshape(paddedSeq, inputDim));
@@ -62,7 +60,6 @@ class App extends Component {
         											}).then(result => {
            												return result[0];
      												});
-		console.log(this.state.models[this.state.chooseModel]);
      	data.value = this.classify(processedText, this.state.models[this.state.chooseModel]);
 		
 		//Redux Part!!!!!!!!!!!!!!!!!!!!!!!!!!//
