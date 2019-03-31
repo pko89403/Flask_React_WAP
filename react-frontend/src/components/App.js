@@ -9,48 +9,52 @@ import { connect } from 'react-redux';
 import { adder, adder2 } from '../store/modules/addResult';
 import { Jumbotron, Button, Container } from 'react-bootstrap';
 import './App.css'
-import { LIST } from 'immutable';
+import { List } from 'immutable';
 
 const MODEL_URL = 'http://54.180.91.80/model';
 const MODEL_URL_AT_WINDOWS = ['http://127.0.0.1/model','http://127.0.0.1/model2'];
 const INPUTDIM = [1, 30]
 const BAGOFWORDS = 3065
 const INPUTDIM2 = [1, BAGOFWORDS]
-
+const LOADING_MODEL_CNT = 2
 class App extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			models: [],
 			inputText : "",
 			loading : false,
 			chooseModel : 0,
-			prediction : [],
-			checkbox : []
+			prediction : this.props.value,
+			checkbox : this.props.value2
 		};
-		console.log(props);  
   	}
-  
+
 	async componentDidMount() {
 		let loaded = []
-		for(let i = 0; i < 2; i++)
+		for(let i = 0; i < LOADING_MODEL_CNT; i++)
 		{
-			let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
-			loaded.push( tmp );
+				let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
+				loaded.push( tmp );
 		}
 
 		this.setState({ models: loaded,
                 		loading: true});
   	}
-	
-	componentWillReceiveProps(nextProps) {
-		console.log("APP props update")    
-		this.setState({	prediction : nextProps.value,
-						checkbox   : nextProps.value2.toJS() });
-		console.log('REDUX UPDATE - ', this.state.checkbox)
-		
+
+/*	  
+	loadModels = async (loadingCNT) => {
+		let loaded = []
+		for(let i = 0; i < loadingCNT; i++)
+		{
+				let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
+				loaded.push( tmp );
+		}
+		return loaded;
 	}
-	
+*/
+
 	classify = (preprcData, model) => {
      	
      	// Data Preprocessing2 Padding preprocessedSequence -> [1, 150]
@@ -108,7 +112,7 @@ class App extends Component {
   	}
  
   	render() {
-
+		console.log("REDUX STORE UPDATED >> ", List(this.props.value2).toJS() );
   		let pageData;
     		if( this.state.loading === false ) {
 

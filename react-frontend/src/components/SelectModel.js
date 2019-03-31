@@ -15,12 +15,10 @@ class SelectModel extends React.Component {
   handleChecked = (e) => {
     console.log("SelectModel Checked");
     
-    const { value2 } = this.props;
-    
-    
-    let box = value2;
-    box = box.toJS();
-    if(value2[e.target.id] === false)
+    const { select } = this.state;
+    let box = select; 
+
+    if(select[e.target.id] === false)
     {
       box[e.target.id] = true;
     }
@@ -29,17 +27,15 @@ class SelectModel extends React.Component {
       box[e.target.id] = false;
     }
 
-    console.log(box);
     // REDUX //
-    var boxList = List(box);
     const { adder2 } = this.props;
-    adder2(boxList);
+    adder2(List(box));
     ///////
 
     this.setState({
       select : box
     })
-
+    console.log('redux dispath > change state : ', this.state.select);
   }
 
   render() {
