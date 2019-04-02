@@ -1,9 +1,15 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from flask_cors import CORS
 from flask import Flask, request, render_template, json, jsonify, send_from_directory
 import json
 import numpy as np
 import io
 import re
+
+import keras
 from keras_preprocessing import text
 
 app = Flask("__main__")
