@@ -75,7 +75,7 @@ class App extends Component {
 		});
 
      	// Text Data -> server (POST : txt) -> text2Seq 
-     	var processedText = await fetch("/getData", {	method: 'POST',
+     	var processedText = await fetch("http://54.180.91.80/getData", {	method: 'POST',
             						      				body: [data.inputTextData]
 							    					}).then(response => {
            												return response.json();
