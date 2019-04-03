@@ -32,18 +32,21 @@ class App extends Component {
   	}
 
 	async componentDidMount() {
+
+/*
 		let loaded = []
 		for(let i = 0; i < LOADING_MODEL_CNT; i++)
 		{
 				let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
 				loaded.push( tmp );
 		}
-
+*/
+		const loaded = await this.loadModels(LOADING_MODEL_CNT);
 		this.setState({ models: loaded,
                 		loading: true});
   	}
 
-/*	  
+	  
 	loadModels = async (loadingCNT) => {
 		let loaded = []
 		for(let i = 0; i < loadingCNT; i++)
@@ -53,7 +56,7 @@ class App extends Component {
 		}
 		return loaded;
 	}
-*/
+
 
 	classify = (preprcData, model) => {
      	
@@ -81,7 +84,7 @@ class App extends Component {
            												return response.json();
         											}).then(result => {
            												return result[0];
-													 });
+													});
 													 
 		//console.log(processedText);
 		// MAKE DATA SELF EMBEDDING INPUTS. /////////////////////////////////////////////////////////////////////
