@@ -8,9 +8,8 @@ import json
 import numpy as np
 import io
 import re
-
-import keras
 from keras_preprocessing import text
+
 
 app = Flask("__main__")
 CORS(app)

@@ -12,8 +12,16 @@ import re
 import keras
 from keras_preprocessing import text
 
+from firebase import firebase
+
+
 app = Flask("__main__")
 CORS(app)
+
+firebase = firebase.FirebaseApplication("https://flaskreactdb.firebaseio.com/log/Time", None)
+new_user = 'Ozgur Vatansever'
+result = firebase.post('/', new_user, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})
+
 
 
 tokenizer = None
