@@ -10,7 +10,6 @@ import io
 import re
 from keras_preprocessing import text
 
-
 app = Flask("__main__")
 CORS(app)
 

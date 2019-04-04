@@ -1,9 +1,19 @@
 import React from 'react';
-import {
-  Form,
-  Button,
-  Col,
-} from 'react-bootstrap';
+import {Form,Button,Col} from 'react-bootstrap';
+import firebase from "firebase/app";
+import "firebase/auth";
+
+
+const config = {
+   apiKey: "AIzaSyD4qGgS2_mfD6-6NhrJDivCty8JG10J91c",
+   authDomain: "flaskreactdb.firebaseapp.com",
+   databaseURL: "https://flaskreactdb.firebaseio.com",
+   projectId: "flaskreactdb",
+   storageBucket: "flaskreactdb.appspot.com",
+   messagingSenderId: "406809941570"
+ };
+ firebase.initializeApp(config);
+
 
 class InputForm1 extends React.Component {
    state = { inputTextData: '' }
