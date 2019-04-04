@@ -1,25 +1,16 @@
 import React from "react";
 import Chart from "react-google-charts";
 import { connect } from 'react-redux';
-
-/*
-const REFERENCE = [ 'brazilian', 'british', 'cajun_creole', 'chinese', 'filipino', 
-                    'french', 'greek',  'indian', 'irish',  'italian',  
-                    'jamaican', 'japanese', 'korean', 'mexican', 'moroccan', 
-                    'russian', 'southern_us', 'spanish', 'thai', 'vietnamese']
-*/
-const TABLE = [ "Brazil", "United Kingdom", "United States", "China", "Philippines", 
-                "France", "Greece",  "India", "Ireland",  "Italy",  
-                "Jamaica", "Japan", "South Korea", "Mexico", "Morocco", 
-                "Russia", "United States", "Spain", "Thailand", "VietNam"]
-
+const databaseURL = "https://flaskreactdb.firebaseio.com/geochart.json";
 
 class World extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       data : null,
-      load : false 
+      load : false,
+      gTable : this.loadTable(databaseURL)
+      
     };
   }
 
@@ -28,6 +19,13 @@ class World extends React.Component {
         this.setState({data : nextProps.value,
                        load : true });
      }
+  }
+
+  loadTable = async (databaseURL) =>  {await fetch(databaseURL).then(response => {
+                                        return response.json();
+                                      }).then(result => {
+                                        return result;
+                                      });
   }
 
   render() {
@@ -41,7 +39,7 @@ class World extends React.Component {
       for(var i = 0; i < data.length; i++)
       {
         const val = Math.round(data[i] * 100);
-        const tmp = [TABLE[i], val];
+        const tmp = [this.state.gTable[i], val];
         if(val > 1){ arr.push(tmp); }
       }
     }
