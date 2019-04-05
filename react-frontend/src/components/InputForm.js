@@ -27,9 +27,11 @@ class InputForm1 extends React.Component {
    handleSubmit = (e) => {
 	   e.preventDefault();
 	   this.props.onCreate(this.state); // 상태 값을 부모에게 전달???
-	   this.setState({
+      /*
+      this.setState({
 	      inputTextData: ''
       });
+      */
    }
 
    handleClear = (e) => {
@@ -47,7 +49,6 @@ class InputForm1 extends React.Component {
                   <Form.Control  as="textarea"
                                  required
                                  variant="dark"
-                                 placeholder="Tomato, Green Tea, olive oil"
                                  value={this.state.inputTextData}
                                  onChange={this.handleChange}
                                  name="inputTextData"/>

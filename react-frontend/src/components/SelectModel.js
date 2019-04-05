@@ -45,21 +45,21 @@ class SelectModel extends React.Component {
             <label>Select Models</label>
             <InputGroup>
                 <InputGroup.Prepend>
-                  <Button>Mother</Button>
+                  <Button>BOW MODEL</Button>
                   <InputGroup.Checkbox  onChange={this.handleChecked}
                                         checked={this.state.select[0]}
                                         id={0}
                                         name="Mother"/>
                 </InputGroup.Prepend>
                 <InputGroup.Prepend>
-                  <Button>Father</Button>
+                  <Button>CBOW MODEL</Button>
                   <InputGroup.Checkbox  onChange={this.handleChecked}
                                         checked={this.state.select[1]}
                                         id={1}
                                         name="Father"/>
                 </InputGroup.Prepend>
                 <InputGroup.Prepend>
-                  <Button>Son</Button>
+                  <Button>EMBEDDING MODEL</Button>
                   <InputGroup.Checkbox  onChange={this.handleChecked}
                                         checked={this.state.select[2]}
                                         id={2}
