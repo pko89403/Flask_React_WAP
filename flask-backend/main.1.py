@@ -11,7 +11,7 @@ import re
 from keras_preprocessing import text
 
 app = Flask("__main__")
-app.use_x_sendfile=True
+#app.use_x_sendfile=True
 CORS(app)
 
 
@@ -77,4 +77,4 @@ def load_shards(path):
 	return send_from_directory(WEIGHT_PATH, path)
 
 
-app.run(host='0.0.0.0', port=443, ssl_context='adhoc', debug=True)
+app.run(host='0.0.0.0', port=443, ssl_context='adhoc', debug=True, threaded=True)
