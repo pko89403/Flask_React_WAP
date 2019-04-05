@@ -12,7 +12,10 @@ import re
 import keras
 from keras_preprocessing import text
 
+
+
 app = Flask("__main__")
+app.use_x_sendfile=True
 CORS(app)
 
 tokenizer = None
