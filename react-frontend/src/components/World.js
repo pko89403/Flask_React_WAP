@@ -1,6 +1,7 @@
 import React from "react";
 import Chart from "react-google-charts";
 import { connect } from 'react-redux';
+
 const databaseURL = "https://flaskreactdb.firebaseio.com/geochart.json";
 
 class World extends React.Component {
@@ -9,9 +10,12 @@ class World extends React.Component {
     this.state = {
       data : null,
       load : false,
-      gTable : this.loadTable(databaseURL)
-      
+      gTable : {}
     };
+  }
+
+	async componentDidMount() {
+    this.loadTable(databaseURL);
   }
 
   componentWillReceiveProps(nextProps) {    
@@ -24,7 +28,9 @@ class World extends React.Component {
   loadTable = async (databaseURL) =>  {await fetch(databaseURL).then(response => {
                                         return response.json();
                                       }).then(result => {
-                                        return result;
+                                        this.setState({
+                                          gTable : result
+                                        })
                                       });
   }
 
