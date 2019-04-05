@@ -80,4 +80,4 @@ def load_shards(path):
 	return send_from_directory(WEIGHT_PATH, path)
 
 
-app.run(host='0.0.0.0', port=80, debug=True, Threaded=True)
+app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
