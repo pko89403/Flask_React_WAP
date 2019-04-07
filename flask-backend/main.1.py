@@ -77,4 +77,4 @@ def load_shards(path):
 	return send_from_directory(WEIGHT_PATH, path)
 
 
-app.run(host='0.0.0.0', port=443, ssl_context='adhoc', debug=True, threaded=True)
+app.run(host='0.0.0.0', port=443, debug=True, threaded=True, ssl_context='adhoc')
