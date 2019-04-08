@@ -11,7 +11,7 @@ import { Jumbotron, Button, Container } from 'react-bootstrap';
 import './App.css'
 import { List } from 'immutable';
 
-const MODEL_URL_AT_WINDOWS = ['https://54.180.91.80:443/model2', 'http://54.180.91.80:80/model', 'http://54.180.91.80:80/model'];
+const MODEL_URL_AT_WINDOWS = ['https://54.180.91.80:443/model2', 'https://54.180.91.80:80/model', 'https://54.180.91.80:80/model'];
 const INPUTDIM = [1, 30]
 const BAGOFWORDS = 3065
 const INPUTDIM2 = [1, BAGOFWORDS]
