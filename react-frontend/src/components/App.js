@@ -11,7 +11,7 @@ import { Jumbotron, Button, Container } from 'react-bootstrap';
 import './App.css'
 import { List } from 'immutable';
 
-const MODEL_URL_AT_WINDOWS = ['https://54.180.91.80:443/modelBOW', 'https://54.180.91.80:80/modelCBOW', 'https://54.180.91.80:80/modelEMB'];
+const MODEL_URL_AT_WINDOWS = ['https://54.180.91.80:443/modelBOW1', 'https://54.180.91.80:80/modelBOW2', 'https://54.180.91.80:443/modelEMB'];
 const INPUTDIM = [1, 30]
 const BAGOFWORDS = 3065
 const INPUTDIM2 = [1, BAGOFWORDS]
@@ -30,16 +30,20 @@ class App extends Component {
   	}
 
 	async componentDidMount() {
-		const loaded = await this.loadModels(LOADING_MODEL_CNT);
-		this.setState({ models: loaded,
+		let modelBOW = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[0] );
+		let modelCBOW = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[1] );
+		let modelEMB = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[2] );
+
+		this.setState({ models: [modelBOW, modelCBOW, modelEMB],
                 		loading: true});
   	}
 
 	  
 	loadModels = async (loadingCNT) => {
 		let loaded = []
-		for(let i = 0; i < loadingCNT; i++)
+		for(let i = 0; i < 3; i++)
 		{
+				console.log(MODEL_URL_AT_WINDOWS[i]);
 				let tmp = await tf.loadLayersModel( MODEL_URL_AT_WINDOWS[i] );
 				loaded.push( tmp );
 		}
@@ -69,9 +73,14 @@ class App extends Component {
 		return this.classify(input, this.state.models[0]);
 	}
 
-	continuousBOGModels = (processedText) => {
-		let paddedSeq = tf.reshape(tf.tensor1d(processedText).pad( [[ INPUTDIM[1]-processedText.length, 0 ]] ), INPUTDIM);
-		return this.classify(paddedSeq, this.state.models[1]);
+	backofwordModels2 = (processedText) => {
+		let bog = new Array(BAGOFWORDS).fill(0);
+		for(let item =0; item < processedText.length; item++)
+		{
+			bog[ processedText[item] ] = 1;
+		}
+		let input = tf.reshape(tf.tensor1d(bog), INPUTDIM2);
+		return this.classify(input, this.state.models[1]);
 	}
 	embeddingModels = (processedText) => {
 		let paddedSeq = tf.reshape(tf.tensor1d(processedText).pad( [[ INPUTDIM[1]-processedText.length, 0 ]] ), INPUTDIM);
@@ -125,9 +134,9 @@ class App extends Component {
 			classification.push(result);
 			console.log("BOG", result)
 		}		
-		// CONTINUOUS BAG OF WORDS ///////////////////////////////////////////////////////////////////
+		// BAG OF WORDS 2 ///////////////////////////////////////////////////////////////////
 		if(this.state.checkbox[1] === true){
-			const result = this.continuousBOGModels(processedText)
+			const result = this.backofwordModels2(processedText)
 			classification.push(result);
 			console.log("CBOG", result)
 		}

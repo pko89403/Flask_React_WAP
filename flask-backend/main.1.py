@@ -55,17 +55,17 @@ def test():
 # access to "/model" connect the static files 
 
 WEIGHT_PATH = ''
-@app.route("/modelBOW")
+@app.route("/modelBOW1")
 def model1():
 	global WEIGHT_PATH
 	WEIGHT_PATH = './LSTM_NE_HypOpt/model/'
 	json_data = json.load(open( WEIGHT_PATH + 'model.json' ))
 	return jsonify(json_data)
 
-@app.route("/modelCBOW")
+@app.route("/modelCBOW2")
 def model2():
 	global WEIGHT_PATH
-	WEIGHT_PATH = './Transfer_CBOW_DNN/model/'
+	WEIGHT_PATH = './DNN_NE_HypOpt/model/'
 	json_data = json.load(open( WEIGHT_PATH + 'model.json' ))
 	return jsonify(json_data)
 
@@ -75,6 +75,7 @@ def model3():
 	WEIGHT_PATH = './1D_YoonKim_Model/model/'
 	json_data = json.load(open( WEIGHT_PATH + 'model.json' ))
 	return jsonify(json_data)
+
 
 # Loading Tensorflow weights
 # access to "/<path:path>"
