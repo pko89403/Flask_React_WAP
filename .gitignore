@@ -222,3 +222,10 @@ flask-backend/templates/static/react/css/main.646db356.chunk.css
 flask-backend/templates/static/react/css/2.215949a4.chunk.css
 flask-backend/templates/static/react/asset-manifest.json
 flask-backend/static/*
+flask-backend/static/react/asset-manifest.json
+flask-backend/static/react/css/2.c3f7ca4c.chunk.css
+flask-backend/static/react/css/main.c58cbc3a.chunk.css
+flask-backend/static/react/js/2.030ea342.chunk.js
+flask-backend/static/react/js/main.2eea9070.chunk.js
+flask-backend/static/react/precache-manifest.cec3e8a6c27b21b2cc3b3793c94a5b47.js
+react-frontend/node_modules/.cache/terser-webpack-plugin/content-v2/sha512/f2/42/871f4232f87f781cd19dc0e09255ae93aac53eb4a9869ea3a77e28ac9546f498b7601bc8e3df47eb45011f93c98972e9089fe72bd5f0057ed82fcb6ba837

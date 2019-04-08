@@ -23,7 +23,7 @@ def input_Text_proc(text_Data):
 	global tokenizer
 	if tokenizer is None:
 		print('Tokenizer is Loaded')
-		with open('./2D_YoonKim/tokenizer_maxLen30.json') as f:
+		with open('./Tokenizer/tokenizer2.json') as f:
 			token_json = json.load(f)
 			tokenizer = text.tokenizer_from_json( token_json )
 	
@@ -62,7 +62,7 @@ def model1():
 	json_data = json.load(open( WEIGHT_PATH + 'model.json' ))
 	return jsonify(json_data)
 
-@app.route("/modelCBOW2")
+@app.route("/modelBOW2")
 def model2():
 	global WEIGHT_PATH
 	WEIGHT_PATH = './DNN_NE_HypOpt/model/'
