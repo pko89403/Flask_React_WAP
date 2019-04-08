@@ -11,7 +11,7 @@ import { Jumbotron, Button, Container } from 'react-bootstrap';
 import './App.css'
 import { List } from 'immutable';
 
-const MODEL_URL_AT_WINDOWS = ['https://54.180.91.80:443/model2', 'https://54.180.91.80:80/model', 'https://54.180.91.80:80/model'];
+const MODEL_URL_AT_WINDOWS = ['https://54.180.91.80:443/modelBOW', 'https://54.180.91.80:80/modelCBOW', 'https://54.180.91.80:80/modelEMB'];
 const INPUTDIM = [1, 30]
 const BAGOFWORDS = 3065
 const INPUTDIM2 = [1, BAGOFWORDS]
@@ -110,7 +110,7 @@ class App extends Component {
 
 		console.log(this.state.checkbox[0], this.state.checkbox[1], this.state.checkbox[2]);
      	// Text Data -> server (POST : txt) -> text2Seq 
-     	var processedText = await fetch("http://54.180.91.80/getData", {	method: 'POST',
+     	var processedText = await fetch("https://54.180.91.80:443/getData", {	method: 'POST',
             						      				body: [data.inputTextData]
 							    					}).then(response => {
            												return response.json();
@@ -163,7 +163,7 @@ class App extends Component {
 								<p>{this.props.value2}</p>
 					   			<Container>
 									<Jumbotron>
-										<h1>Hit Country Classification System Based On Ingredient-Cuisine Dataset</h1>
+										<h1>재료 데이터들을 이용한 요리의 예상 인기 나라 분류</h1>
 									</Jumbotron>
 									<Button variant="primary" size="lg" block className={this.state.inputText==="" ? 'hidden' : ' '}>{this.state.inputText}</Button>
 									<World/>
